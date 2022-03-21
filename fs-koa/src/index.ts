@@ -14,7 +14,7 @@ app.use(bodyParser());
 
 router.get('/read', async (ctx: Koa.Context, next: Koa.Next) => {
   try {
-    ctx.body = await readRouter(ctx);
+    ctx.body = await readRouter(ctx?.request);
   } catch (err) {
     ctx.status = 500;
     ctx.body = err;
@@ -25,7 +25,7 @@ router.get('/read', async (ctx: Koa.Context, next: Koa.Next) => {
 
 router.post('/create', async (ctx: Koa.Context, next: Koa.Next) => {
   try {
-    ctx.body = await createRouter(ctx);
+    ctx.body = await createRouter(ctx?.request);
   } catch (err) {
     ctx.status = 500;
     ctx.body = err;

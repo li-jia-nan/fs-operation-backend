@@ -18,7 +18,7 @@ app.use((0, koa_logger_1.default)());
 app.use((0, koa_bodyparser_1.default)());
 router.get('/read', async (ctx, next) => {
   try {
-    ctx.body = await (0, router_1.readRouter)(ctx);
+    ctx.body = await (0, router_1.readRouter)(ctx?.request);
   } catch (err) {
     ctx.status = 500;
     ctx.body = err;
@@ -28,7 +28,7 @@ router.get('/read', async (ctx, next) => {
 });
 router.post('/create', async (ctx, next) => {
   try {
-    ctx.body = await (0, router_1.createRouter)(ctx);
+    ctx.body = await (0, router_1.createRouter)(ctx?.request);
   } catch (err) {
     ctx.status = 500;
     ctx.body = err;

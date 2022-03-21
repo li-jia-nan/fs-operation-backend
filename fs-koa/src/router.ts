@@ -1,11 +1,11 @@
-import { Context } from 'koa';
+import koa from 'koa';
 import { readFile, writeFile } from 'fs-extra';
 import { ErrorModel, SuccessModel } from './model';
-import { join, serializer, deserializer } from './utils';
+import { serializer, deserializer, join } from './utils';
 
-export const readRouter = (ctx: Context): Promise<SuccessModel> => {
+export const readRouter = (req: koa.Request): Promise<SuccessModel> => {
   return new Promise<SuccessModel>((resolve, reject) => {
-    const { path } = ctx.query;
+    const { path } = req?.query;
     if (!path) {
       reject(new ErrorModel(null, '读取失败，请传入正确的path'));
     }
@@ -19,9 +19,9 @@ export const readRouter = (ctx: Context): Promise<SuccessModel> => {
   });
 };
 
-export const createRouter = (ctx: Context): Promise<SuccessModel> => {
+export const createRouter = (req: koa.Request): Promise<SuccessModel> => {
   return new Promise<SuccessModel>((resolve, reject) => {
-    const { path, content } = ctx.request.body;
+    const { path, content } = req?.body;
     if (!path || !content) {
       reject(new ErrorModel(null, '写入失败，请传入正确的参数'));
     }

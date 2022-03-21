@@ -4,9 +4,9 @@ exports.createRouter = exports.readRouter = void 0;
 const fs_extra_1 = require('fs-extra');
 const model_1 = require('./model');
 const utils_1 = require('./utils');
-const readRouter = ctx => {
+const readRouter = req => {
   return new Promise((resolve, reject) => {
-    const { path } = ctx.query;
+    const { path } = req?.query;
     if (!path) {
       reject(new model_1.ErrorModel(null, '读取失败，请传入正确的path'));
     }
@@ -20,9 +20,9 @@ const readRouter = ctx => {
   });
 };
 exports.readRouter = readRouter;
-const createRouter = ctx => {
+const createRouter = req => {
   return new Promise((resolve, reject) => {
-    const { path, content } = ctx.request.body;
+    const { path, content } = req?.body;
     if (!path || !content) {
       reject(new model_1.ErrorModel(null, '写入失败，请传入正确的参数'));
     }
